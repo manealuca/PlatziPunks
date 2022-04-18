@@ -3,10 +3,12 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "./Base64.sol";
 import "./PlatziPunksDNA.sol";
 contract PlatziPunks is ERC721, ERC721Enumerable, PlatziPunksDNA{
     using Counters for Counters.Counter;
+    using Strings for uint256;
     Counters.Counter private _idCounter;
 
     uint256 public maxSupply;
@@ -18,7 +20,7 @@ contract PlatziPunks is ERC721, ERC721Enumerable, PlatziPunksDNA{
 
     function mint()public{
         uint256 current  = _idCounter.current();
-        require(current < maxSupply,"No PlatziPunks left :(");
+        require(current <= maxSupply,"No PlatziPunks left :(");
         tokenDNA[current] = deterministicPseudoRandomDna(current, msg.sender);
         _safeMint(msg.sender, current);
         _idCounter.increment();
@@ -67,7 +69,7 @@ contract PlatziPunks is ERC721, ERC721Enumerable, PlatziPunksDNA{
         string memory jsonURI = Base64.encode(
             string (abi.encodePacked(
                     '{ "name": "PlatziPunks #"}',
-                    tokenId,
+                    tokenId.toString(),
                     '"", "description": "Platzi Punks are randomized Avataars stored on chain to each DApp development on platzi", "image": "',
                     "",
                     '"attributtes": [{"Accesories Type": "Blank", "Clothe Color": "Red","Cloth Type":"Hoodie","Eye Type":"Close","Eye Brow Type":"Angry","Facial Hair Color":"Blonde","Facial Hair Type":"MoustacheMagnum","Hair Color":"SilverGray","Hat Color":"White","Graphic Type":"Skull","Mouth Type":"Smile","Skin Color":"light","Top Type";"LongHairMiaWallace",}]',

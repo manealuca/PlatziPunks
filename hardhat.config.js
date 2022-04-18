@@ -10,10 +10,10 @@ module.exports = {
   networks:{
     rinkeby: {
       url: `https://rinkerby.infura.io/v3/${RINKEBY_RPC_URL}`,
-      accounts: [
+      accounts: 
         //Llave privada de la wallet Owner del proyecto
         [PRIVATE_KEY]
-      ]
+      
     }
   }
 };
