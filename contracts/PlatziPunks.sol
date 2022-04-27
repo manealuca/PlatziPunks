@@ -27,7 +27,7 @@ contract PlatziPunks is ERC721, ERC721Enumerable, PlatziPunksDNA{
     }
 
     function _baseURI() internal pure override returns(string memory) {
-        return"https://avataars.io/";
+        return"https://avatars.io/";
     }
     //Generaremos los parametros para modificar la apiURL
     function _paramsURI( uint256 _dna)internal view returns(string memory){

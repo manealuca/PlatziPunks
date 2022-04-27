@@ -42,8 +42,8 @@ describe('Plati Punks Contract',()=>{
             await expect(deployed.mint()).to.be.revertedWith("No platzi punks left :(");
         })
     })
-    escribe("tokenURI",()=>{
-        it('returns valid metadata',()=>{
+    describe("tokenURI", ()=>{
+        it('returns valid metadata',async ()=>{
             const {deployed}  = await setup({});
             await deployed.mint();
             const tokenURI = await deployed.tokenURI(0);
